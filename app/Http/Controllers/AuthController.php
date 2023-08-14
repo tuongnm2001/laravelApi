@@ -22,14 +22,8 @@ class AuthController extends Controller
             'password'=>Hash::make($data['password']),
         ]);
 
-        $token = $user->createToken('token')->plainTextToken;
-        $user->update([
-            'remember_token' => $token
-        ]);
-
         return $response =[
             'user'=>$user,
-            'token'=>$token,
             'errorCode'=>200,
         ];
     }

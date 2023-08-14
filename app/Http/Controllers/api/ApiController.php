@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Models\User;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\HasApiTokens;
 
 class ApiController extends Controller
 {
@@ -52,7 +52,8 @@ class ApiController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        // auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Successfully logged out']);
     }
 
